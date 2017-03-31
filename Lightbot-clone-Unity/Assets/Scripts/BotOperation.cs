@@ -9,12 +9,12 @@ public class BotOperation
 
 	}
 
-	public void RunOperation ()
+	public virtual void RunOperation ()
 	{
 
 	}
 
-	public void ValidateOperation()
+	public virtual void ValidateOperation()
 	{
 
 	}

@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForwardOperation : BotOperation 
+public class CompositeOperation : BotOperation 
 {
+	private List<BotOperation> opList;
+
+	public CompositeOperation()
+	{
+		opList = new List<BotOperation> ();
+	}
+
 	public override void ValidateOperation ()
 	{
 		base.ValidateOperation ();

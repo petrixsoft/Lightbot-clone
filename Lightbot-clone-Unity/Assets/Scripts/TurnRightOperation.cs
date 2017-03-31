@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class TurnRightOperation : BotOperation 
 {
-	
+	public override void ValidateOperation ()
+	{
+		base.ValidateOperation ();
+	}
+
+	public override void RunOperation ()
+	{
+		base.RunOperation ();
+	}
 }
