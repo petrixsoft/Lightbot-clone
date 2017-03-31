@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TurnLeftOperation : BotOperation
 {
-	public override void ValidateOperation ()
+	public override bool ValidateOperation ()
 	{
-		base.ValidateOperation ();
+		return true;
 	}
 
 	public override void RunOperation ()

@@ -11,13 +11,31 @@ public class CompositeOperation : BotOperation
 		opList = new List<BotOperation> ();
 	}
 
-	public override void ValidateOperation ()
+	public void AddOperation(BotOperation op)
 	{
-		base.ValidateOperation ();
+		opList.Add (op);
+	}
+
+	public void AddOperation(BotOperation op, int pos)
+	{
+		opList.Insert (pos, op);
+	}
+
+	public override bool ValidateOperation ()
+	{
+		return true;
 	}
 
 	public override void RunOperation ()
 	{
-		base.RunOperation ();
+		for (int i = 0; i < opList.Count; i++)
+		{
+			BotOperation botOp = opList [i];
+
+			if (botOp != null && botOp.ValidateOperation())
+			{
+				botOp.RunOperation ();
+			}
+		}
 	}
 }

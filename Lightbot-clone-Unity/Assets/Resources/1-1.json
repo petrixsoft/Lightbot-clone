@@ -1,0 +1,11 @@
+{
+	"name": "1-1",
+	"maxScore": 1000,
+	"numRows": 3,
+	"numColumns": 3,
+	"botPos": {"x": 0, "y": 0},
+	"board":
+	[
+		{}
+	]
+}

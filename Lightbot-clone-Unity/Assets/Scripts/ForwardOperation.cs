@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ForwardOperation : BotOperation 
 {
-	public override void ValidateOperation ()
+	public override bool ValidateOperation ()
 	{
-		base.ValidateOperation ();
+		return base.ValidateOperation ();
 	}
 
 	public override void RunOperation ()
