@@ -5,20 +5,27 @@ using UnityEngine;
 [System.Serializable]
 public class Tile
 {
-	private int height;
-	private bool lightable;
-	private int[] position;
+	public int height;
+	public bool lightable;
+	public Vector2 position;
 
 	// Use this for initialization
 	public Tile()
 	{
-		position = new int[2];
+		position = Vector2.zero;
 	}
 
-	public void setInfo(int height, bool lightable, int[] position)
+	public void setInfo(int height, bool lightable, Vector2 position)
 	{
 		this.height = height;
 		this.lightable = lightable;
 		this.position = position;
+	}
+	public override string ToString ()
+	{
+		string toString = "";
+		toString += "Height: " + height + ", lightable: " + lightable + ", Position: " + position + " | ";
+
+		return toString;
 	}
 }

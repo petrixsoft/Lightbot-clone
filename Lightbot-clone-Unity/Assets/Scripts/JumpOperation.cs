@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class JumpOperation : BotOperation 
 {
-	public override bool ValidateOperation ()
+	public override bool ValidateOperation (GameObject botObject, LevelDefinition levelDef)
 	{
-		return base.ValidateOperation ();
+		return true;
 	}
 
-	public override void RunOperation ()
+	public override void RunOperation (GameObject botObject, LevelDefinition levelDef)
 	{
-		base.RunOperation ();
+		botObject.transform.localPosition += botObject.transform.forward + botObject.transform.up;
 	}
 }

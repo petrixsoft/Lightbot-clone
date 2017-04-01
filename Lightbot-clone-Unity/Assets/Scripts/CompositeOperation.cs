@@ -21,20 +21,20 @@ public class CompositeOperation : BotOperation
 		opList.Insert (pos, op);
 	}
 
-	public override bool ValidateOperation ()
+	public override bool ValidateOperation (GameObject botObject, LevelDefinition levelDef)
 	{
 		return true;
 	}
 
-	public override void RunOperation ()
+	public override void RunOperation (GameObject botObject, LevelDefinition levelDef)
 	{
 		for (int i = 0; i < opList.Count; i++)
 		{
 			BotOperation botOp = opList [i];
 
-			if (botOp != null && botOp.ValidateOperation())
+			if (botOp != null && botOp.ValidateOperation(botObject, levelDef))
 			{
-				botOp.RunOperation ();
+				botOp.RunOperation (botObject, levelDef);
 			}
 		}
 	}
