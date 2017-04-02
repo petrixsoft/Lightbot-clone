@@ -33,6 +33,4 @@ public class ForwardOperation : BotOperation
 		levelDef.botPos += levelDef.getDirectionFromEnum ();
 		botObject.transform.localPosition += botObject.transform.forward;
 	}
-		
-
 }

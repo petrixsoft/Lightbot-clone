@@ -78,8 +78,16 @@ public class LevelManager : MonoBehaviour
 			{
 				GameObject tile = Instantiate (tileGO, boardGO.transform);
 				Tile t = levelDefinition.board [i, j];
+				t.associatedGO = tile;
 
 				tile.transform.position = new Vector3 (t.position.x, t.height, t.position.y);
+
+				if (t.lightable)
+				{
+					Material light = Resources.Load<Material> ("Materials/LightOffMat");
+					Renderer r = tile.GetComponent<Renderer> ();
+					r.sharedMaterial = light;
+				}
 			}
 		}
 	}

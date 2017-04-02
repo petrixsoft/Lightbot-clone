@@ -33,6 +33,7 @@ public class BotController : MonoBehaviour {
 		availableOps.Add ("TL", new TurnLeftOperation ());
 		availableOps.Add ("TR", new TurnRightOperation ());
 		availableOps.Add ("JMP", new JumpOperation ());
+		availableOps.Add ("LGHT", new LightOperation ());
 	}
 
 	public void RunOperation(string op)

@@ -9,6 +9,8 @@ public class Tile
 	public bool lightable;
 	public Vector2 position;
 
+	public GameObject associatedGO;
+
 	// Use this for initialization
 	public Tile()
 	{
