@@ -1255,7 +1255,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1465499933}
+      - m_Target: {fileID: 1881368447}
         m_MethodName: RunOperation
         m_Mode: 5
         m_Arguments:
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1465499933}
+      - m_Target: {fileID: 1881368447}
         m_MethodName: RunOperation
         m_Mode: 5
         m_Arguments:
@@ -1676,12 +1676,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4532680995478886, guid: e162fa0a6856e9d49bef7444774821cb,
     type: 2}
   m_PrefabInternal: {fileID: 1881368446}
---- !u!114 &1465499933 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114848399292330228, guid: e162fa0a6856e9d49bef7444774821cb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1881368446}
-  m_Script: {fileID: 11500000, guid: 53596ac90011f394a88247b48df14883, type: 3}
 --- !u!1 &1576928522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1465499933}
+      - m_Target: {fileID: 1881368447}
         m_MethodName: RunOperation
         m_Mode: 5
         m_Arguments:
@@ -2190,6 +2184,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e162fa0a6856e9d49bef7444774821cb, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1881368447 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114517226695495046, guid: e162fa0a6856e9d49bef7444774821cb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1881368446}
+  m_Script: {fileID: 11500000, guid: 53596ac90011f394a88247b48df14883, type: 3}
 --- !u!1 &1979867823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1465499933}
+      - m_Target: {fileID: 1881368447}
         m_MethodName: RunOperation
         m_Mode: 5
         m_Arguments:

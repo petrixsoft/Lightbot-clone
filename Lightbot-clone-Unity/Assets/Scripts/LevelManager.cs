@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].height, 
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.y);
 
-		BotController  bController = actualBotGO.AddComponent<BotController> ();
+		BotController  bController = actualBotGO.GetComponent<BotController> ();
 		bController.LevelDef = levelDefinition;
 
 		for (int i = 0; i < levelDefinition.numRows; i++)
