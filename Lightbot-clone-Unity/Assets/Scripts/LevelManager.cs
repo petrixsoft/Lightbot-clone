@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
 	private void LevelLoad()
 	{
+		BotController  bController = actualBotGO.GetComponent<BotController> ();
 		TextAsset levelJson = Resources.Load<TextAsset> ("1-1");
 		levelDefinition = new LevelDefinition ();
 
@@ -54,6 +55,45 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 
+		int opAmount = levelD ["availableOps"].AsArray.Count;
+
+		for (int i = 0; i < opAmount; i++)
+		{
+			var op = levelD ["availableOps"] [i];
+			string name = op ["name"];
+
+			switch (name)
+			{
+				case "FWD":
+					bController.AddOperation (new ForwardOperation (), false, false, "FWD");
+					break;
+				case "TL":
+					bController.AddOperation (new TurnLeftOperation (), false, false, "TL");
+					break;
+				case "TR":
+					bController.AddOperation (new TurnRightOperation (), false, false, "TR");
+					break;
+				case "JMP":
+					bController.AddOperation (new JumpOperation (), false, false, "JMP");
+					break;
+				case "LGHT":
+					bController.AddOperation (new LightOperation (), false, false, "LGHT");
+					break;
+				case "Main":
+					bController.AddOperation (new CompositeOperation (), true, true, "Main");
+					break;
+				default:
+					//  If the operation is not one of the above it means that it's a function (or an unknown operation which isn't good)
+					if (op ["type"] == "Composite")
+					{
+						bController.AddOperation (new CompositeOperation (), false, true, op ["name"]);
+					}
+					break;
+			}
+		}
+
+		bController.LevelDef = levelDefinition;
+
 		Resources.UnloadAsset (levelJson);
 
 		//Debug.Log (levelDefinition.ToString());
@@ -68,9 +108,6 @@ public class LevelManager : MonoBehaviour
 		actualBotGO.transform.localPosition = new Vector3(levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.x, 
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].height, 
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.y);
-
-		BotController  bController = actualBotGO.GetComponent<BotController> ();
-		bController.LevelDef = levelDefinition;
 
 		for (int i = 0; i < levelDefinition.numRows; i++)
 		{

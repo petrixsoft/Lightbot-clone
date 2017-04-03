@@ -5,6 +5,7 @@ using UnityEngine;
 public class CompositeOperation : BotOperation 
 {
 	private List<BotOperation> opList;
+	private float operationDelay = .5f;
 
 	public CompositeOperation()
 	{
