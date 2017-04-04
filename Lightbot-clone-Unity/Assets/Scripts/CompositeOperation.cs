@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class CompositeOperation : BotOperation 
 {
-	private List<BotOperation> opList;
-	private float operationDelay = .5f;
+	public List<BotOperation> opList;
+	public int limit;
+	public string name;
 
 	public CompositeOperation()
 	{
 		opList = new List<BotOperation> ();
 	}
 
-	public void AddOperation(BotOperation op)
+	public bool AddOperation(BotOperation op)
 	{
-		opList.Add (op);
+		if (opList.Count < limit)
+		{
+			opList.Add (op);
+			return true;
+		}
+
+		return false;
+	}
+
+	public void removeOperation(int index)
+	{
+		opList.RemoveAt (index);
 	}
 
 	public void AddOperation(BotOperation op, int pos)
@@ -29,14 +41,5 @@ public class CompositeOperation : BotOperation
 
 	public override void RunOperation (GameObject botObject, LevelDefinition levelDef)
 	{
-		for (int i = 0; i < opList.Count; i++)
-		{
-			BotOperation botOp = opList [i];
-
-			if (botOp != null && botOp.ValidateOperation(botObject, levelDef))
-			{
-				botOp.RunOperation (botObject, levelDef);
-			}
-		}
 	}
 }

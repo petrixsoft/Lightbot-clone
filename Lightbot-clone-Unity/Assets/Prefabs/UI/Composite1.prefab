@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224230898613114364}
   - component: {fileID: 222486315868376550}
   - component: {fileID: 114918321730435168}
+  - component: {fileID: 114074022770398554}
   m_Layer: 5
   m_Name: Composite1
   m_TagString: Untagged
@@ -62,6 +63,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114074022770398554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143364634197302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99dc3cd2ff73a14da3ac48847416b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 114398139781532622}
+  opSlots: []
+  opLimit: 0
+  grid: {fileID: 1412874308370606}
+  tileGO: {fileID: 1746393307491156, guid: 3f7466b56ae22b54ba93b397686cb1c7, type: 2}
 --- !u!114 &114225110220408550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,10 +199,10 @@ RectTransform:
   m_Father: {fileID: 224230898613114364}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.036000002, y: 0.78800005}
-  m_AnchorMax: {x: 0.46949226, y: 0.97700006}
-  m_AnchoredPosition: {x: -0.5999985, y: 0.30000305}
-  m_SizeDelta: {x: 0.9000015, y: -0.79999924}
+  m_AnchorMin: {x: 0.036000002, y: 0.83267134}
+  m_AnchorMax: {x: 0.39000002, y: 0.97700006}
+  m_AnchoredPosition: {x: -1.0999985, y: 0.19999695}
+  m_SizeDelta: {x: 0, y: -0.70000005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224230898613114364
 RectTransform:
@@ -202,10 +219,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.034, y: 0.633}
+  m_AnchorMin: {x: 0.034, y: 0.53547895}
   m_AnchorMax: {x: 0.9703297, y: 0.9707184}
-  m_AnchoredPosition: {x: -0.3219986, y: 1}
-  m_SizeDelta: {x: -1, y: -4}
+  m_AnchoredPosition: {x: -0.3219986, y: -1}
+  m_SizeDelta: {x: -1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224879803883882648
 RectTransform:

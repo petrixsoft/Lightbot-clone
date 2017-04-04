@@ -40,7 +40,14 @@
 		{
 			"name": "Main",
 			"type": "Composite",
-			"main": true
+			"main": true,
+			"limit": 3
+		},
+		{
+			"name": "P1",
+			"type": "Composite",
+			"main": false,
+			"limit": 6
 		}
 	]
 }

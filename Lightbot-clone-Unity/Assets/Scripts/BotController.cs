@@ -5,13 +5,14 @@ using UnityEngine;
 public class BotController : MonoBehaviour {
 
 	public float operationDelay = .5f;
+	public UIManager uiManager;
 
 	private LevelDefinition levelDef;
 
 	private Dictionary<string, BotOperation> availableOps;
-	private Dictionary<string, List<BotOperation>> compositeOps;
+	private Dictionary<string, BotOperation> compositeOps;
 
-	private List<BotOperation> mainOp;
+	private CompositeOperation mainOp;
 
 	// Wether it's the main or another function, the operations will be added to the active composite operation
 	private CompositeOperation currentComposite;
@@ -37,15 +38,24 @@ public class BotController : MonoBehaviour {
 	{
 		availableOps = new Dictionary<string, BotOperation> ();
 
-		mainOp = new List<BotOperation> ();
-		compositeOps = new Dictionary<string, List<BotOperation>> ();
+		mainOp = new CompositeOperation ();
+		compositeOps = new Dictionary<string, BotOperation> ();
 	}
 
+	/// <summary>
+	/// Adds the operation to the available operations list
+	/// </summary>
+	/// <param name="operation">Operation.</param>
+	/// <param name="main">If set to <c>true</c> main.</param>
+	/// <param name="composite">If set to <c>true</c> composite.</param>
+	/// <param name="name">Name.</param>
 	public void AddOperation(BotOperation operation, bool main, bool composite, string name)
 	{
 		if (main)
 		{
-			mainOp = new List<BotOperation> ();
+			CompositeOperation compOp = operation as CompositeOperation;
+			mainOp = compOp;
+			currentComposite = compOp;
 			compositeOps.Add (name, mainOp);
 
 		} else if (!composite)
@@ -53,23 +63,29 @@ public class BotController : MonoBehaviour {
 			availableOps.Add (name, operation);
 		} else
 		{
-			List<BotOperation> opList;
-			compositeOps.TryGetValue (name, out opList);
-			opList.Add (operation);
-			//compositeOps.Add (name, operation);
+			compositeOps.Add (name, operation);
 		}
 	}
 
-	public void AddToMainOP(BotOperation operation, int index)
+	/// <summary>
+	/// Adds the selected operation to the main function
+	/// </summary>
+	/// <param name="operation">Operation.</param>
+	/// <param name="index">Index.</param>
+	public bool AddToCurrentComp(BotOperation operation, int index)
 	{
-		mainOp.Add (operation);
+		return currentComposite.AddOperation (operation);
 	}
 
-	public void RemoveFromMainOp(int index)
+	public void RemoveFromCurrentComp(int index)
 	{
-
+		currentComposite.removeOperation (index);
 	}
 
+	/// <summary>
+	/// Adds the operation to the active composite operation
+	/// </summary>
+	/// <param name="op">Op.</param>
 	public void RunOperation(string op)
 	{
 		BotOperation operation = null;
@@ -77,7 +93,40 @@ public class BotController : MonoBehaviour {
 
 		if (exists)
 		{
-			AddToMainOP (operation, 0);
+			if (AddToCurrentComp (operation, 0))
+			{
+				uiManager.AddOperationToBlock (currentComposite.name, op);
+			}
+		} else
+		{
+			// Maybe its a composite
+			BotOperation compOp = null;
+			bool existsComp = compositeOps.TryGetValue (op, out compOp);
+
+			if (existsComp)
+			{
+				CompositeOperation comp = compOp as CompositeOperation;
+				if (AddToCurrentComp (comp, 0))
+				{
+					uiManager.AddOperationToBlock (currentComposite.name, op);
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Change the composite operation to which the operations will be added
+	/// </summary>
+	/// <param name="name">Name.</param>
+	public void ChangeCurrentComposite(string name)
+	{
+		BotOperation operation = null;
+		bool exists = compositeOps.TryGetValue (name, out operation);
+		CompositeOperation compOp = operation as CompositeOperation;
+
+		if (compOp != null)
+		{
+			currentComposite = compOp;
 		}
 	}
 
@@ -89,14 +138,23 @@ public class BotController : MonoBehaviour {
 
 	IEnumerator CompositeRun(string name)
 	{
-		List<BotOperation> botOpList;
-		compositeOps.TryGetValue (name, out botOpList);
+		BotOperation operation;
+		compositeOps.TryGetValue (name, out operation);
+		CompositeOperation compOp = operation as CompositeOperation;
+		List<BotOperation> botOpList = compOp.opList;
 
 		if (botOpList != null)
 		{
 			for (int i = 0; i < botOpList.Count; i++)
 			{
 				BotOperation op = botOpList [i];
+				CompositeOperation comp = op as CompositeOperation;
+
+				if (comp != null)
+				{
+					// If this operation is a composite one we need to execute it first accordingly
+					yield return StartCoroutine (CompositeRun(comp.name));
+				}
 
 				if (op != null && op.ValidateOperation(gameObject, levelDef))
 				{

@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject contentGO;
 	public GameObject actualBotGO;
 	public GameObject boardGO;
+	public UIManager uiManager;
 
 	[Header ("To be used to build the world")]
 	public GameObject tileGO;
@@ -66,27 +67,41 @@ public class LevelManager : MonoBehaviour
 			{
 				case "FWD":
 					bController.AddOperation (new ForwardOperation (), false, false, "FWD");
+					uiManager.EnableOp (name);
 					break;
 				case "TL":
 					bController.AddOperation (new TurnLeftOperation (), false, false, "TL");
+					uiManager.EnableOp (name);
 					break;
 				case "TR":
 					bController.AddOperation (new TurnRightOperation (), false, false, "TR");
+					uiManager.EnableOp (name);
 					break;
 				case "JMP":
 					bController.AddOperation (new JumpOperation (), false, false, "JMP");
+					uiManager.EnableOp (name);
 					break;
 				case "LGHT":
 					bController.AddOperation (new LightOperation (), false, false, "LGHT");
+					uiManager.EnableOp (name);
 					break;
 				case "Main":
-					bController.AddOperation (new CompositeOperation (), true, true, "Main");
+					CompositeOperation compOp = new CompositeOperation ();
+					compOp.limit = op ["limit"].AsInt;
+					compOp.name = "Main";
+					bController.AddOperation (compOp, true, true, "Main");
+					uiManager.EnableBlock (name, op["limit"].AsInt);
 					break;
 				default:
 					//  If the operation is not one of the above it means that it's a function (or an unknown operation which isn't good)
-					if (op ["type"] == "Composite")
+					if (op ["type"].Value == "Composite")
 					{
-						bController.AddOperation (new CompositeOperation (), false, true, op ["name"]);
+						CompositeOperation comp = new CompositeOperation ();
+						comp.limit = op ["limit"].AsInt;
+						comp.name = op ["name"];
+						bController.AddOperation (comp, false, true, op ["name"]);
+						uiManager.EnableBlock (name, op["limit"].AsInt);
+						uiManager.EnableOp (name);
 					}
 					break;
 			}
