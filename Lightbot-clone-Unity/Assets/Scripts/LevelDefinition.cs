@@ -45,6 +45,28 @@ public class LevelDefinition
 		return direction;
 	}
 
+	public LevelDefinition Clone()
+	{
+		LevelDefinition newLevel = new LevelDefinition ();
+		newLevel.name = name;
+		newLevel.numRows = numRows;
+		newLevel.numColumns = numColumns;
+		newLevel.maxScore = maxScore;
+		newLevel.botPos = botPos;
+
+		newLevel.board = new Tile[numRows, numColumns];
+
+		for (int i = 0; i < numRows; i++)
+		{
+			for (int j = 0; j < numColumns; j++)
+			{
+				newLevel.board[i,j] = board[i,j];
+			}
+		}
+
+		return newLevel;
+	}
+
 	public override string ToString ()
 	{
 		string toString = "";

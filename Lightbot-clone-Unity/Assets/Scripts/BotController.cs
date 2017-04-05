@@ -208,10 +208,16 @@ public class BotController : MonoBehaviour {
 		}
 	}
 
-	// TODO Maybe deleting the composite operations and replace them by lists on this monobehavior would make things work (and we need that)
 	public void RunMain()
 	{
+		uiManager.ChangeUIMode ("Run");
 		StartCoroutine (CompositeRun ("Main"));
+	}
+
+	public void ResetBot()
+	{
+		uiManager.ChangeUIMode ("Build");
+		StopAllCoroutines ();
 	}
 
 	IEnumerator CompositeRun(string name)

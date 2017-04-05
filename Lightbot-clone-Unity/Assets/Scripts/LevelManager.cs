@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject tileGO;
 
 	private LevelDefinition levelDefinition;
+	private GameObject[,] levelBuild;
 
 	void Start()
 	{
@@ -107,7 +108,7 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 
-		bController.LevelDef = levelDefinition;
+		bController.LevelDef = levelDefinition.Clone();
 
 		Resources.UnloadAsset (levelJson);
 
@@ -119,6 +120,8 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
 	private void BuildLevel()
 	{
+		levelBuild = new GameObject[levelDefinition.numRows, levelDefinition.numColumns];
+
 		// Instancing all the gameObjects we are going to need
 		actualBotGO.transform.localPosition = new Vector3(levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.x, 
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].height, 
@@ -140,7 +143,43 @@ public class LevelManager : MonoBehaviour
 					Renderer r = tile.GetComponent<Renderer> ();
 					r.sharedMaterial = light;
 				}
+
+				levelBuild [i, j] = tile;
 			}
 		}
+	}
+
+	public void ResetLevel()
+	{
+		BotController  bController = actualBotGO.GetComponent<BotController> ();
+		bController.LevelDef = levelDefinition.Clone ();
+
+		actualBotGO.transform.localPosition = new Vector3(levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.x, 
+			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].height, 
+			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.y);
+
+		Quaternion newRotation = new Quaternion ();
+		newRotation.eulerAngles = new Vector3 (0, 90, 0);
+
+		actualBotGO.transform.localRotation = newRotation;
+
+		for (int i = 0; i < levelDefinition.numRows; i++)
+		{
+			for (int j = 0; j < levelDefinition.numColumns; j++)
+			{
+				GameObject tile = levelBuild [i, j];
+				Tile t = levelDefinition.board [i, j];
+
+				if (t.lightable)
+				{
+					Material light = Resources.Load<Material> ("Materials/LightOffMat");
+					Renderer r = tile.GetComponent<Renderer> ();
+					r.sharedMaterial = light;
+					t.lightOn = false;
+				}
+			}
+		}
+
+		bController.ResetBot ();
 	}
 }

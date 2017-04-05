@@ -20,6 +20,23 @@ public class UIManager : MonoBehaviour
 	public GameObject MainBlock;
 	public GameObject P1Block;
 
+	[Header ("Run buttons")]
+	public GameObject runButton;
+	public GameObject stopButton;
+
+	public void ChangeUIMode(string mode)
+	{
+		if (mode == "Run")
+		{
+			runButton.SetActive (false);
+			stopButton.SetActive (true);
+		} else if (mode == "Build")
+		{
+			stopButton.SetActive (false);
+			runButton.SetActive (true);
+		}
+	}
+
 	public void AddOperationToBlock(string blockName, string opName)
 	{
 		
