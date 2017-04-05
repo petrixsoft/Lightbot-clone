@@ -913,6 +913,8 @@ MonoBehaviour:
   P1Button: {fileID: 1628127257}
   MainBlock: {fileID: 31675125}
   P1Block: {fileID: 1069507098}
+  runButton: {fileID: 381187350}
+  stopButton: {fileID: 77772529}
 --- !u!1 &426184831
 GameObject:
   m_ObjectHideFlags: 0
