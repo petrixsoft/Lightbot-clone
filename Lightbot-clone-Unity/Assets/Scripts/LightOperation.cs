@@ -32,6 +32,7 @@ public class LightOperation : BotOperation {
 	{
 		Vector2 currentPos = levelDef.botPos;
 		Tile currentTile = levelDef.board [(int)currentPos.x, (int)currentPos.y];
+		currentTile.lightOn = true;
 		Renderer r = currentTile.associatedGO.GetComponent<Renderer> ();
 		r.sharedMaterial = lightOnMat;
 	}

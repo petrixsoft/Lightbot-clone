@@ -7,6 +7,7 @@ public class Tile
 {
 	public int height;
 	public bool lightable;
+	public bool lightOn;
 	public Vector2 position;
 
 	public GameObject associatedGO;

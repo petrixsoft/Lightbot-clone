@@ -16,6 +16,7 @@ public class BotController : MonoBehaviour {
 
 	// Wether it's the main or another function, the operations will be added to the active composite operation
 	private CompositeOperation currentComposite;
+	private int indexOpSelected = -1;
 
 	public LevelDefinition LevelDef
 	{
@@ -40,6 +41,21 @@ public class BotController : MonoBehaviour {
 
 		mainOp = new CompositeOperation ();
 		compositeOps = new Dictionary<string, BotOperation> ();
+	}
+
+	/// <summary>
+	/// Selects an operation inside a composite so we can eliminate it later if we want
+	/// </summary>
+	/// <param name="index">Index.</param>
+	public void SelectOperation(int index)
+	{
+		if (indexOpSelected != index)
+		{
+			indexOpSelected = index;
+		} else
+		{
+			indexOpSelected = -1;
+		}
 	}
 
 	/// <summary>
@@ -79,7 +95,9 @@ public class BotController : MonoBehaviour {
 
 	public void RemoveFromCurrentComp(int index)
 	{
+		
 		currentComposite.removeOperation (index);
+		uiManager.RemoveOperationFromBlock (currentComposite.name, index);
 	}
 
 	/// <summary>
@@ -159,6 +177,12 @@ public class BotController : MonoBehaviour {
 				if (op != null && op.ValidateOperation(gameObject, levelDef))
 				{
 					op.RunOperation (gameObject, levelDef);
+
+					if (CheckGameOver ())
+					{
+						// If all the lights are on then there's no need to continue running the processes, it's game over
+						StopAllCoroutines ();
+					}
 				}
 
 				yield return new WaitForSeconds (operationDelay);
@@ -166,5 +190,26 @@ public class BotController : MonoBehaviour {
 		}
 
 		yield return null;
+	}
+
+	private bool CheckGameOver()
+	{
+		for (int i = 0; i < levelDef.numRows; i++)
+		{
+			for (int j = 0; j < levelDef.numColumns; j++)
+			{
+				Tile t = levelDef.board [i, j];
+
+				if (t.lightable && !t.lightOn)
+				{
+					Debug.Log ("Try Again");
+					return false;
+				}
+			}
+		}
+
+		Debug.Log ("You Win");
+
+		return true;
 	}
 }

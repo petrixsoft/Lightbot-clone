@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class OpTile : MonoBehaviour {
+public class OpTile : MonoBehaviour, IPointerClickHandler {
+
+	public int index;
 
 	private Transform cTransform;
 	private GameObject lastActive;
+	private BotController bot;
+
 
 	void Awake()
 	{
@@ -16,7 +22,7 @@ public class OpTile : MonoBehaviour {
 			lastActive = tr.gameObject;
 			lastActive.SetActive (true);
 		}
-
+		bot = FindObjectOfType<BotController> ();
 	}
 
 	public void ShowOp(string name)
@@ -31,4 +37,13 @@ public class OpTile : MonoBehaviour {
 			lastActive.SetActive (true);
 		}
 	}
+
+	#region IPointerClickHandler implementation
+
+	public void OnPointerClick (PointerEventData eventData)
+	{
+		bot.RemoveFromCurrentComp (index);
+	}
+
+	#endregion
 }

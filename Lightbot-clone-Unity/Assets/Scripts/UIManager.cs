@@ -40,6 +40,25 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public void RemoveOperationFromBlock(string blockName, int index)
+	{
+		if (blockName == "Main")
+		{
+			CompositeUI cUI = MainBlock.GetComponent<CompositeUI> ();
+			if (cUI != null)
+			{
+				cUI.RemoveOperation (index);
+			}
+		} else
+		{
+			CompositeUI cUI = P1Block.GetComponent<CompositeUI> ();
+			if (cUI != null)
+			{
+				cUI.RemoveOperation (index);
+			}
+		}
+	}
+
 	public void EnableOp(string name)
 	{
 		getOpButtonGO (name).SetActive (true);
