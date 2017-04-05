@@ -14,7 +14,7 @@ public class FadeInOut : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		OnFinishLerping = new UnityEvent ();
+		//OnFinishLerping = new UnityEvent ();
 	}
 	
 	// Update is called once per frame

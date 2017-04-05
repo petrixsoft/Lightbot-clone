@@ -18,15 +18,25 @@ public class GameManager : MonoBehaviour {
 
 	private int currentSceneIndex;
 	private FadeInOut fade;
+	public static bool loaded;
 
 	// Use this for initialization
 	void Start () {
 		currentSceneIndex = 0;
-		DontDestroyOnLoad (this);
-		DontDestroyOnLoad (canvasFade);
-		SceneManager.sceneLoaded += SceneLoaded;
-		fade = canvasFade.GetComponentInChildren<FadeInOut>();
-		fade.OnFinishLerping.AddListener (ChangeToNextScene);
+		if (!GameManager.loaded)
+		{
+			DontDestroyOnLoad (gameObject);
+			DontDestroyOnLoad (canvasFade);
+
+			SceneManager.sceneLoaded += SceneLoaded;
+			fade = canvasFade.GetComponentInChildren<FadeInOut>();
+			//fade.OnFinishLerping.AddListener (ChangeToNextScene);
+			GameManager.loaded = true;
+		} else
+		{
+			DestroyImmediate (canvasFade);
+			DestroyImmediate (gameObject);
+		}
 	}
 
 	public void ChangeScene(string nextLevel)
