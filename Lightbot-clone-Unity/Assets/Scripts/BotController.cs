@@ -258,6 +258,10 @@ public class BotController : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Everytime an operation is run we checked if it changed the state of the game
+	/// </summary>
+	/// <returns><c>true</c>, if game over was checked, <c>false</c> otherwise.</returns>
 	private bool CheckGameOver()
 	{
 		for (int i = 0; i < levelDef.numRows; i++)
