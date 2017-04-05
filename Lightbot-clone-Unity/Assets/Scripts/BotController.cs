@@ -49,13 +49,62 @@ public class BotController : MonoBehaviour {
 	/// <param name="index">Index.</param>
 	public void SelectOperation(int index)
 	{
-		if (indexOpSelected != index)
+		if (index != -1)
 		{
-			indexOpSelected = index;
+			if (index == indexOpSelected)
+			{
+				uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+				indexOpSelected = -1;
+			} else
+			{
+				if (indexOpSelected != -1)
+				{
+					uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+				}
+
+				uiManager.SelectOperation (currentComposite.name, index);
+				indexOpSelected = index;
+			}
 		} else
 		{
-			indexOpSelected = -1;
+			if (indexOpSelected != -1)
+			{
+				uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+				indexOpSelected = -1;
+			}
 		}
+
+		/*
+		if (indexOpSelected != index)
+		{
+			if (index < currentComposite.opList.Count)
+			{
+				if (indexOpSelected != -1)
+				{
+					uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+					indexOpSelected = -1;
+				}
+				if (index != -1)
+				{
+					indexOpSelected = index;
+					uiManager.SelectOperation (currentComposite.name, index);
+				}
+			} else
+			{
+				if (indexOpSelected != -1)
+				{
+					uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+					indexOpSelected = -1;
+				}
+			}
+		} else
+		{
+			if (index < currentComposite.opList.Count && index != -1)
+			{
+				indexOpSelected = -1;
+				uiManager.DeselectOperation (currentComposite.name, index);
+			}
+		}*/
 	}
 
 	/// <summary>
@@ -93,11 +142,14 @@ public class BotController : MonoBehaviour {
 		return currentComposite.AddOperation (operation);
 	}
 
-	public void RemoveFromCurrentComp(int index)
+	public void RemoveFromCurrentComp()
 	{
-		
-		currentComposite.removeOperation (index);
-		uiManager.RemoveOperationFromBlock (currentComposite.name, index);
+		if (indexOpSelected != -1)
+		{
+			currentComposite.removeOperation (indexOpSelected);
+			uiManager.RemoveOperationFromBlock (currentComposite.name, indexOpSelected);
+			indexOpSelected = -1;
+		}
 	}
 
 	/// <summary>
@@ -144,7 +196,15 @@ public class BotController : MonoBehaviour {
 
 		if (compOp != null)
 		{
+			uiManager.DeselectBlock (currentComposite.name);
+			if (indexOpSelected != -1)
+			{
+				uiManager.DeselectOperation (currentComposite.name, indexOpSelected);
+			}
+
 			currentComposite = compOp;
+			indexOpSelected = -1;
+			uiManager.SelectBlock (currentComposite.name);
 		}
 	}
 

@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 224230898613114364}
   - component: {fileID: 222486315868376550}
-  - component: {fileID: 114918321730435168}
+  - component: {fileID: 114601001078825268}
   - component: {fileID: 114074022770398554}
+  - component: {fileID: 114906199974988540}
   m_Layer: 5
   m_Name: Composite1
   m_TagString: Untagged
@@ -75,10 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 114398139781532622}
-  opSlots: []
   opLimit: 0
   grid: {fileID: 1412874308370606}
   tileGO: {fileID: 1746393307491156, guid: 3f7466b56ae22b54ba93b397686cb1c7, type: 2}
+  selected: {fileID: 21300002, guid: 6f1004867261226489026505b992255b, type: 3}
+  deSelected: {fileID: 21300000, guid: 6f1004867261226489026505b992255b, type: 3}
 --- !u!114 &114225110220408550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,7 +126,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Main
---- !u!114 &114918321730435168
+--- !u!114 &114601001078825268
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -151,6 +153,36 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114906199974988540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143364634197302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: ChangeCurrentComposite
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Main
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114995770044782238
 MonoBehaviour:
   m_ObjectHideFlags: 1

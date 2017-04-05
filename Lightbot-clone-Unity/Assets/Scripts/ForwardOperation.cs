@@ -31,6 +31,6 @@ public class ForwardOperation : BotOperation
 	public override void RunOperation (GameObject botObject, LevelDefinition levelDef)
 	{
 		levelDef.botPos += levelDef.getDirectionFromEnum ();
-		botObject.transform.localPosition += botObject.transform.forward;
+		botObject.transform.position += botObject.transform.forward;//botObject.transform.localToWorldMatrix.MultiplyVector(-botObject.transform.right);
 	}
 }

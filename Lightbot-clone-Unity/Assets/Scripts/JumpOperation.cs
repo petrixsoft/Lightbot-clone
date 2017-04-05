@@ -32,7 +32,7 @@ public class JumpOperation : BotOperation
 
 	public override void RunOperation (GameObject botObject, LevelDefinition levelDef)
 	{
-		botObject.transform.localPosition = getNextPosition (botObject, levelDef);
+		botObject.transform.position = getNextPosition (botObject, levelDef);
 
 		levelDef.botPos += levelDef.getDirectionFromEnum ();
 	}
@@ -43,7 +43,7 @@ public class JumpOperation : BotOperation
 		Tile currentTile = levelDef.board [(int)levelDef.botPos.x, (int)levelDef.botPos.y];
 		Tile nextTile = levelDef.board [(int)nextPos.x, (int)nextPos.y];
 
-		Vector3 currentPosition = botObject.transform.localPosition;
+		Vector3 currentPosition = botObject.transform.position;
 		Vector3 nextPosition = Vector3.zero;
 
 		if (currentTile.height < nextTile.height)

@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224326585672548856}
   - component: {fileID: 114279408503087712}
+  - component: {fileID: 114538362069531652}
   m_Layer: 5
   m_Name: OpTile
   m_TagString: Untagged
@@ -255,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ac1345fa566674ea930ff868ac7497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: -1
 --- !u!114 &114301670450956358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,6 +311,36 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114538362069531652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746393307491156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114279408503087712}
+          m_MethodName: SelectOperation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114760082116518610
 MonoBehaviour:
   m_ObjectHideFlags: 1

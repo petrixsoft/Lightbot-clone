@@ -4,14 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class OpTile : MonoBehaviour, IPointerClickHandler {
+public class OpTile : MonoBehaviour {
 
-	public int index;
+	public int index = -1;
 
 	private Transform cTransform;
 	private GameObject lastActive;
 	private BotController bot;
 
+	public GameObject LastActive
+	{
+		get
+		{
+			return lastActive;
+		}
+	}
 
 	void Awake()
 	{
@@ -38,12 +45,24 @@ public class OpTile : MonoBehaviour, IPointerClickHandler {
 		}
 	}
 
-	#region IPointerClickHandler implementation
-
-	public void OnPointerClick (PointerEventData eventData)
+	public void Select()
 	{
-		bot.RemoveFromCurrentComp (index);
+		Image tileIm = lastActive.GetComponent<Image> ();
+		tileIm.color = Color.green;
 	}
 
-	#endregion
+	public void DeSelect()
+	{
+		Image tileIm = lastActive.GetComponent<Image> ();
+		tileIm.color = Color.white;
+	}
+
+	public void SelectOperation ()
+	{
+		CompositeUI cUI = GetComponentInParent<CompositeUI> ();
+		if (cUI.IsSelected)
+		{
+			bot.SelectOperation (index);
+		}
+	}
 }

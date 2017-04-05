@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
 		{
 			MainBlock.SetActive (true);
 			CompositeUI compUI = MainBlock.GetComponent<CompositeUI> ();
-
+			compUI.Select ();
 			if (compUI != null)
 			{
 				compUI.Init (name, limit);
@@ -79,11 +79,56 @@ public class UIManager : MonoBehaviour
 		{
 			P1Block.SetActive (true);
 			CompositeUI compUI = P1Block.GetComponent<CompositeUI> ();
+			compUI.Deselect ();
 
 			if (compUI != null)
 			{
 				compUI.Init (name, limit);
 			}
+		}
+	}
+
+	public void SelectBlock(string name)
+	{
+		GameObject block = getBlock (name);
+
+		if (block != null)
+		{
+			CompositeUI blockUI = block.GetComponent<CompositeUI> ();
+			blockUI.Select ();
+		}
+	}
+
+	public void DeselectBlock(string name)
+	{
+		GameObject block = getBlock (name);
+
+		if (block != null)
+		{
+			CompositeUI blockUI = block.GetComponent<CompositeUI> ();
+			blockUI.Deselect ();
+		}
+	}
+
+	public void SelectOperation(string compName, int index)
+	{
+		GameObject comp = getBlock (compName);
+		if (comp != null)
+		{
+			CompositeUI compUI = comp.GetComponent<CompositeUI> ();
+
+			compUI.SelectOperation (index);
+		}
+	}
+
+	public void DeselectOperation(string compName, int index)
+	{
+		GameObject comp = getBlock (compName);
+		if (comp != null)
+		{
+			CompositeUI compUI = comp.GetComponent<CompositeUI> ();
+
+			compUI.DeSelectOperation (index);
 		}
 	}
 
@@ -107,6 +152,19 @@ public class UIManager : MonoBehaviour
 				return LGHTButton;
 			case "P1":
 				return P1Button;
+		}
+
+		return null;
+	}
+
+	private GameObject getBlock(string name)
+	{
+		if (name == "Main")
+		{
+			return MainBlock;
+		} else if (name == "P1")
+		{
+			return P1Block;
 		}
 
 		return null;

@@ -13,10 +13,21 @@ public class CompositeUI : MonoBehaviour {
 
 	[Header ("Build")]
 	public GameObject tileGO;
+	public Sprite selected;
+	public Sprite deSelected;
 
 	private List<GameObject> opList;
 	// The next operation will be added at that index
 	private int nextOpIndex;
+	private bool isSelected;
+
+	public bool IsSelected
+	{
+		get
+		{
+			return isSelected;
+		}
+	}
 
 	void OnEnable()
 	{
@@ -53,6 +64,7 @@ public class CompositeUI : MonoBehaviour {
 		{
 			GameObject nextOperation = opList [nextOpIndex];
 			OpTile t = nextOperation.GetComponent<OpTile> ();
+			t.index = nextOpIndex;
 
 			if (t != null)
 			{
@@ -62,6 +74,36 @@ public class CompositeUI : MonoBehaviour {
 		}
 	}
 
+	public void Select()
+	{
+		Image im = GetComponent<Image> ();
+		im.sprite = selected;
+		isSelected = true;
+	}
+
+	public void Deselect()
+	{
+		Image im = GetComponent<Image> ();
+		im.sprite = deSelected;
+		isSelected = false;
+	}
+
+	public void SelectOperation(int index)
+	{
+		GameObject go = opList [index];
+		OpTile tile = go.GetComponent<OpTile> ();
+
+		tile.Select ();
+	}
+
+	public void  DeSelectOperation(int index)
+	{
+		GameObject go = opList [index];
+		OpTile tile = go.GetComponent<OpTile> ();
+
+		tile.DeSelect ();
+	}
+
 	/// <summary>
 	/// Removes the operation from the grid
 	/// </summary>
@@ -69,8 +111,42 @@ public class CompositeUI : MonoBehaviour {
 	public void RemoveOperation(int index)
 	{
 		GameObject go = opList [index];
-		go.transform.SetParent (null);
-		go.transform.SetParent (grid.transform);
+		OpTile tile = go.GetComponent<OpTile> ();
+		tile.DeSelect ();
+		tile.ShowOp ("EMPTY");
+		tile.index = -1;
+
+		ReSortTiles ();
 		nextOpIndex--;
+	}
+
+	/// <summary>
+	/// After deleting an operation we update the compositeUI
+	/// </summary>
+	private void ReSortTiles()
+	{
+		for (int i = 0; i < opList.Count; i++)
+		{
+			GameObject go = opList [i];
+			OpTile tile = go.GetComponent<OpTile> ();
+
+			if (tile != null)
+			{
+				if (tile.LastActive.name == "EMPTY" && i <= opList.Count - 2)
+				{
+					GameObject nextGo = opList [i + 1];
+					OpTile nextTile = nextGo.GetComponent<OpTile> ();
+
+					if (nextTile.LastActive.name != "EMPTY")
+					{
+						tile.ShowOp (nextTile.LastActive.name);
+						nextTile.DeSelect ();
+						nextTile.ShowOp ("EMPTY");
+						nextTile.index = -1;
+						tile.index = i;
+					}
+				}
+			}
+		}
 	}
 }
