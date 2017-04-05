@@ -28,17 +28,11 @@ public class GameManager : MonoBehaviour {
 		fade = canvasFade.GetComponentInChildren<FadeInOut>();
 		fade.OnFinishLerping.AddListener (ChangeToNextScene);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void ChangeScene(string nextLevel)
 	{
 		currentSceneIndex = sceneList.IndexOf(nextLevel);
 		fade.FadeToBlack ();
-		//SceneManager.LoadSceneAsync (sceneList[currentSceneIndex]);
 	}
 
 	public void ReturnPreviousScene()
