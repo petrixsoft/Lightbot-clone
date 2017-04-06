@@ -279,6 +279,7 @@ public class BotController : MonoBehaviour {
 		}
 
 		Debug.Log ("You Win");
+		uiManager.OpenSendScore (levelDef.maxScore);
 
 		return true;
 	}

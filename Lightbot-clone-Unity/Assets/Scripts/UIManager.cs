@@ -7,6 +7,14 @@ public class UIManager : MonoBehaviour
 {
 
 	public GameObject contentGO;
+	public NetworkCapabilities netC;
+
+
+	[Header ("Networking UI")]
+	public Text inputNameText;
+	public GameObject sendScoreGO;
+	public Text scoreText;
+	public Text feedbackMessage;
 
 	[Header ("Building OpButtons")]
 	public GameObject FWDButton;
@@ -147,6 +155,28 @@ public class UIManager : MonoBehaviour
 
 			compUI.DeSelectOperation (index);
 		}
+	}
+
+	public void OpenSendScore(int score)
+	{
+		sendScoreGO.SetActive (true);
+		scoreText.text = score.ToString ();
+	}
+
+	public void SendScore()
+	{
+		if (!string.IsNullOrEmpty(inputNameText.text))
+		{
+			netC.SendScore (inputNameText.text);
+		} else
+		{
+			SendScoreMessage ("Name must not be empty");
+		}
+	}
+
+	public void SendScoreMessage(string message)
+	{
+		feedbackMessage.text = message;
 	}
 
 	private GameObject getOpButtonGO(string name)
