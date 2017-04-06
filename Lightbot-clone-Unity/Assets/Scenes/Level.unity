@@ -5367,6 +5367,11 @@ Prefab:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 423797008}
+    - target: {fileID: 23208272096201184, guid: e162fa0a6856e9d49bef7444774821cb,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 292c2a32c1c00334ea507678ce9885c0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e162fa0a6856e9d49bef7444774821cb, type: 2}
   m_IsPrefabParent: 0
