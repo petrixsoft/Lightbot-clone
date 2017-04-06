@@ -69,7 +69,7 @@ public class LevelListManager : MonoBehaviour {
 
 					if (item != null)
 					{
-						item.SetData(list[i]["name"], list[i]["url"]);
+						item.SetData(list[i]["name"], list[i]["uri"]);
 						item.gManager = gManager;
 						item.lManager = this;
 

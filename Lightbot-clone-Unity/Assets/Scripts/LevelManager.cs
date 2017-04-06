@@ -15,9 +15,12 @@ public class LevelManager : MonoBehaviour
 
 	private LevelDefinition levelDefinition;
 	private GameObject[,] levelBuild;
+	private LevelListManager listManager;
 
 	void Start()
 	{
+		GameObject listManagerGO = GameObject.Find ("SceneManager");
+		listManager = listManagerGO.GetComponent<LevelListManager> ();
 		LevelLoad ();
 		BuildLevel ();
 	}
@@ -28,7 +31,7 @@ public class LevelManager : MonoBehaviour
 	private void LevelLoad()
 	{
 		BotController  bController = actualBotGO.GetComponent<BotController> ();
-		TextAsset levelJson = Resources.Load<TextAsset> ("1-1");
+		TextAsset levelJson = Resources.Load<TextAsset> (listManager.chosenLevelUrl);
 		levelDefinition = new LevelDefinition ();
 
 		var levelD = JSON.Parse (levelJson.text);

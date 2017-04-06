@@ -23,10 +23,10 @@ public class LevelListItem : MonoBehaviour, IPointerClickHandler {
 		
 	}
 
-	public void SetData(string name, string url)
+	public void SetData(string n, string u)
 	{
-		this.name = name;
-		this.url = url;
+		name = n;
+		url = u;
 		nameText.text = name;
 	}
 
