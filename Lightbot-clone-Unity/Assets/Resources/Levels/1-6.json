@@ -1,0 +1,55 @@
+{
+	"name": "L6",
+	"maxScore": 1000,
+	"numRows": 5,
+	"numColumns": 1,
+	"botPos": {"x": 0, "y": 0},
+	"board":
+	[
+		[{"height": 0, "lightable": true, "position": {"x":0, "y":0}}],
+		[{"height": 0, "lightable": true, "position": {"x":1, "y":0}}],
+		[{"height": 0, "lightable": true, "position": {"x":2, "y":0}}],
+		[{"height": 0, "lightable": true, "position": {"x":3, "y":0}}],
+		[{"height": 0, "lightable": true, "position": {"x":4, "y":0}}]
+	],
+	"availableOps":
+	[
+		{
+			"name": "FWD",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "TR",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "TL",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "JMP",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "LGHT",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "Main",
+			"type": "Composite",
+			"main": true,
+			"limit": 1
+		},
+		{
+			"name": "P1",
+			"type": "Composite",
+			"main": false,
+			"limit": 3
+		}
+	]
+}

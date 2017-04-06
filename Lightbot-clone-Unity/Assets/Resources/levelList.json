@@ -7,19 +7,23 @@
 		},
 		{
 			"name": "L2",
-			"uri": "Levels/1-1"
+			"uri": "Levels/1-2"
 		},
 		{
 			"name": "L3",
-			"uri": "Levels/1-1"
+			"uri": "Levels/1-3"
 		},
 		{
 			"name": "L4",
-			"uri": "Levels/1-1"
+			"uri": "Levels/1-4"
 		},
 		{
 			"name": "L5",
-			"uri": "Levels/1-1"
+			"uri": "Levels/1-5"
+		},
+		{
+			"name": "L6",
+			"uri": "Levels/1-6"
 		}
 	]
 }

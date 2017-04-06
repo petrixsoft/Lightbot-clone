@@ -1,0 +1,42 @@
+{
+	"name": "L2",
+	"maxScore": 1000,
+	"numRows": 3,
+	"numColumns": 3,
+	"botPos": {"x": 0, "y": 0},
+	"board":
+	[
+		[{"height": 0, "lightable": false, "position": {"x":0, "y":0}},{"height": 0, "lightable": false, "position": {"x":0, "y":1}},{"height": 0, "lightable": false, "position": {"x":0, "y":2}}],
+		[{"height": 0, "lightable": false, "position": {"x":1, "y":0}},{"height": 0, "lightable": false, "position": {"x":1, "y":1}},{"height": 0, "lightable": false, "position": {"x":1, "y":2}}],
+		[{"height": 0, "lightable": false, "position": {"x":2, "y":0}},{"height": 0, "lightable": false, "position": {"x":2, "y":1}},{"height": 0, "lightable": true, "position": {"x":2, "y":2}}]
+	],
+	"availableOps":
+	[
+		{
+			"name": "FWD",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "TR",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "TL",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "LGHT",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "Main",
+			"type": "Composite",
+			"main": true,
+			"limit": 6
+		}
+	]
+}

@@ -31,6 +31,11 @@ public class NetworkCapabilities : MonoBehaviour {
 		}
 	}
 
+	public void getScoreList(string levelName)
+	{
+		StartCoroutine (GetHighScoreList (levelName));
+	}
+
 	public void SendScore(string username)
 	{
 		StartCoroutine (SendScoreAsync (username));
@@ -76,6 +81,35 @@ public class NetworkCapabilities : MonoBehaviour {
 			gManager.ChangeScene ("LevelList");
 		}
 
+		yield return null;
+	}
+
+	IEnumerator GetHighScoreList(string levelName)
+	{
+		WWW request = new WWW ("http://31.220.57.122/kirosWeb/lightbot_server/public/score/list?levelname=" + levelName);
+
+		yield return request;
+
+		var JSONResponse = JSON.Parse (request.text);
+
+		if (JSONResponse != null)
+		{
+			string result = JSONResponse ["result"].Value;
+
+			if (result == "Ok")
+			{
+				JSONArray list = JSONResponse ["data"].AsArray;
+				List<string> scoreList = new List<string> ();
+
+				for (int i = 0; i < list.Count; i++)
+				{
+					string scoreText = list [i] ["username"] + ": " + list [i] ["score"];
+					scoreList.Add (scoreText);
+				}
+
+				uiManager.SetScoreList (scoreList);
+			}
+		}
 		yield return null;
 	}
 }

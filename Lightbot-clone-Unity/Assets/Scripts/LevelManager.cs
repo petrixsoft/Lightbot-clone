@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
 		}
 
 		bController.LevelDef = levelDefinition.Clone();
+		bController.LevelDef.maxScore = levelDefinition.maxScore;
 
 		Resources.UnloadAsset (levelJson);
 
@@ -155,7 +156,14 @@ public class LevelManager : MonoBehaviour
 	public void ResetLevel()
 	{
 		BotController  bController = actualBotGO.GetComponent<BotController> ();
+		int score = bController.LevelDef.maxScore - 100;
+		if (score < 0)
+		{
+			score = 0;
+		}
+
 		bController.LevelDef = levelDefinition.Clone ();
+		bController.LevelDef.maxScore = score;
 
 		actualBotGO.transform.localPosition = new Vector3(levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].position.x, 
 			levelDefinition.board[(int)levelDefinition.botPos.x, (int)levelDefinition.botPos.y].height, 

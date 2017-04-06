@@ -10,11 +10,15 @@ public class UIManager : MonoBehaviour
 	public NetworkCapabilities netC;
 
 
-	[Header ("Networking UI")]
+	[Header ("Upload score UI")]
 	public Text inputNameText;
 	public GameObject sendScoreGO;
 	public Text scoreText;
 	public Text feedbackMessage;
+
+	[Header ("High Score UI")]
+	public GameObject highScoreGO;
+	public List<Text> scoreItems;
 
 	[Header ("Building OpButtons")]
 	public GameObject FWDButton;
@@ -157,6 +161,50 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Shows the highscore panel and tries to retrieve the score list
+	/// </summary>
+	public void OpenHighScore()
+	{
+		string levelName = "";
+		GameObject botControllerGO = GameObject.Find ("Bot");
+		BotController bController = null;
+		if (botControllerGO != null)
+		{
+			bController = botControllerGO.GetComponent<BotController> ();
+			highScoreGO.SetActive (true);
+			netC.getScoreList (bController.LevelDef.name);
+		}
+	}
+
+	/// <summary>
+	/// The net manager will call this method which populates the score list with the given information
+	/// </summary>
+	/// <param name="list">List.</param>
+	public void SetScoreList(List<string> list)
+	{
+		for (int i = 0; i < scoreItems.Count; i++)
+		{
+			Text scoreText = scoreItems [i];
+			if (i < list.Count)
+			{
+				scoreText.text = (i+1) + ". " + list[i];
+			} else
+			{
+				scoreText.text = (i+1) + ". ";
+			}
+		}
+	}
+
+	public void CloseHighScore()
+	{
+		highScoreGO.SetActive (false);
+	}
+
+	/// <summary>
+	/// Opens the send score panel.
+	/// </summary>
+	/// <param name="score">Score.</param>
 	public void OpenSendScore(int score)
 	{
 		sendScoreGO.SetActive (true);
@@ -174,6 +222,10 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Shows a feedback message regarding the success of the net request
+	/// </summary>
+	/// <param name="message">Message.</param>
 	public void SendScoreMessage(string message)
 	{
 		feedbackMessage.text = message;

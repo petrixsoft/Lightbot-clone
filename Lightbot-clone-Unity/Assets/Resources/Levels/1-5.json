@@ -1,5 +1,5 @@
 {
-	"name": "L1",
+	"name": "L5",
 	"maxScore": 1000,
 	"numRows": 3,
 	"numColumns": 1,
@@ -16,7 +16,22 @@
 			"name": "FWD",
 			"type": "Single",
 			"main": false
-		}
+		},
+		{
+			"name": "TR",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "TL",
+			"type": "Single",
+			"main": false
+		},
+		{
+			"name": "JMP",
+			"type": "Single",
+			"main": false
+		},
 		{
 			"name": "LGHT",
 			"type": "Single",
@@ -26,6 +41,12 @@
 			"name": "Main",
 			"type": "Composite",
 			"main": true,
+			"limit": 1
+		},
+		{
+			"name": "P1",
+			"type": "Composite",
+			"main": false,
 			"limit": 3
 		}
 	]
