@@ -18,7 +18,10 @@ this is a known bug with the WebGL export on unity**
 
 # Level Descriptions
 
+
 There are described 6 levels in the game, each level tries to "teach" a game feature:
+
+*All levels are loaded on runtime from JSON files under the resources folder. that way we know how is the board, which operations are available, etc*
 
 **Level1**: You only have 2 operations available (forward and light) and 3 slots on the "Main" block.
 this is a very simple level just to show a bit the game mechanics
