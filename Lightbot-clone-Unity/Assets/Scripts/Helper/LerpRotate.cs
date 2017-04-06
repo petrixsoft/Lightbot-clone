@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LerpRotate : MonoBehaviour {
 
 	public AnimationCurve curve;
 	public float duration;
 	public Transform target;
+
+	public Button me;
+	public Button twin;
 
 	private float currTime;
 	private bool playing;
@@ -40,6 +44,8 @@ public class LerpRotate : MonoBehaviour {
 			if (Mathf.Approximately(1f, curve.Evaluate (currTime)))
 			{
 				playing = false;
+				twin.interactable = true;
+				me.interactable = true;
 			}
 
 		}
@@ -53,6 +59,8 @@ public class LerpRotate : MonoBehaviour {
 			this.increment = increment;
 			initialValue = target.rotation.eulerAngles.y;
 			playing = true;
+			twin.interactable = false;
+			me.interactable = false;
 		}
 	}
 }

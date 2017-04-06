@@ -25,7 +25,9 @@ public class GridSizeCalculator : MonoBehaviour {
 		size.width -= padding / 2;
 		size.width -= grid.spacing.x * (numCols -1);
 
+
 		float width = size.width/ numCols;
+
 		grid.cellSize = new Vector2 (width, width);
 	}
 }

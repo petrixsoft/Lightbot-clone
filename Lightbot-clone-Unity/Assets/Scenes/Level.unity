@@ -5042,6 +5042,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   duration: 0
   target: {fileID: 223156855}
+  me: {fileID: 1797367685}
+  twin: {fileID: 1908434009}
 --- !u!1 &1809928264
 GameObject:
   m_ObjectHideFlags: 0
@@ -5534,6 +5536,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   duration: 0
   target: {fileID: 223156855}
+  me: {fileID: 1908434009}
+  twin: {fileID: 1797367685}
 --- !u!1 &1918274064
 GameObject:
   m_ObjectHideFlags: 0
