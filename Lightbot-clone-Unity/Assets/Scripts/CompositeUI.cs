@@ -49,6 +49,7 @@ public class CompositeUI : MonoBehaviour {
 			GameObject tile = Instantiate (tileGO);
 
 			tile.transform.SetParent (grid.transform);
+			tile.transform.localScale = Vector3.one;
 
 			opList.Add (tile);
 		}
